@@ -7,10 +7,7 @@ trigger:
 - main
 
 
-pool: 
-  name: Pipeline Self Hosted
-  demands:
-  - agent.name -equals MachineForPiipe
+
 
 stages:
 - stage: Build
@@ -18,7 +15,8 @@ stages:
   jobs:
   - job: MavenPackageAndPublishArtifacts
     displayName: Maven Package and Publish Artifacts
-    
+  pool: 
+    name: Pipeline Self Hosted  
 
     steps:
     - task: Maven@3
