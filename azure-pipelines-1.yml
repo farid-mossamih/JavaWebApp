@@ -20,18 +20,18 @@ stages:
 
     steps:
 - task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
-  displayName: 'Prepare analysis on SonarCloud'
+  displayName: Prepare analysis on SonarCloud
   inputs:
     SonarCloud: SonarCloud
     organization: fmossamih01
     projectKey: 'fmossamih_JavaWebApplication'
     projectName: 'JavaWebApplication'
 - task: Maven@3
-      displayName: 'Maven Package'
+      displayName: Maven Package
       inputs:
         mavenPomFile: 'pom.xml'
 - task: CopyFiles@2
-  displayName: 'Copy Files to artifact staging directory'
+  displayName: Copy Files to artifact staging directory
   inputs:
      SourceFolder: '$(System.DefaultWorkingDirectory)'
      Contents: '**/target/*.?(war|jar)'
@@ -42,8 +42,8 @@ stages:
 
 
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
-  displayName: 'Run Code Analysis'
+  displayName: Run Code Analysis
 
   
  - task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
-  displayName: 'Publish Quality Gate Result'
+  displayName: Publish Quality Gate Result
