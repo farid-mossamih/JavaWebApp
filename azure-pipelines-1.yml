@@ -27,9 +27,9 @@ steps:
     projectKey: 'fmossamih_JavaWebApplication'
     projectName: 'JavaWebApplication'
 - task: Maven@3
-      displayName: 'Maven Package'
-      inputs:
-        mavenPomFile: 'pom.xml'
+  displayName: Maven Package
+  inputs:
+    mavenPomFile: 'pom.xml'
 - task: CopyFiles@2
   displayName: Copy Files to artifact staging directory
   inputs:
