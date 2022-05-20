@@ -45,4 +45,4 @@ stages:
     - task: SonarCloudAnalyze@1
       displayName: 'Run Code Analysis'
     - task: SonarCloudPublish@1
-      displayName: 'P'ublish Quality Gate Result'
+      displayName: 'Publish Quality Gate Result'
