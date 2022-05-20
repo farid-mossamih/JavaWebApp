@@ -20,21 +20,21 @@ stages:
 
     steps:
     - task: SonarCloudPrepare@1
-      displayName: Prepare analysis on SonarCloud
+      displayName: 'Prepare analysis on SonarCloud'
       inputs:
-       SonarCloud: Sonar-Java
-       organization: fmossamih01
+       SonarCloud: 'Sonar-Java'
+       organization: 'fmossamih01'
        # Additional properties that will be passed to the scanner,
        # Put one key=value per line, example:
        # sonar.exclusions=**/*.bin
-       projectKey: fmossamih_JavaWebApplication
-       projectName: JavaWebApplication
+       projectKey: 'fmossamih_JavaWebApplication'
+       projectName: 'JavaWebApplication'
     - task: Maven@3
-      displayName: Maven Package
+      displayName: 'Maven Package'
       inputs:
        mavenPomFile: 'pom.xml'
     - task: CopyFiles@2
-      displayName: Copy Files to artifact staging directory
+      displayName: 'Copy Files to artifact staging directory'
       inputs:
        SourceFolder: '$(System.DefaultWorkingDirectory)'
        Contents: '**/target/*.?(war|jar)'
@@ -43,6 +43,6 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
     - task: SonarCloudAnalyze@1
-      displayName: Run Code Analysis
+      displayName: 'Run Code Analysis'
     - task: SonarCloudPublish@1
-      displayName: Publish Quality Gate Result
+      displayName: 'P'ublish Quality Gate Result'
