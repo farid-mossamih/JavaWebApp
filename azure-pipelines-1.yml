@@ -27,7 +27,7 @@ steps:
     projectKey: 'fmossamih_JavaWebApplication'
     projectName: 'JavaWebApplication'
 - task: Maven@3
-      displayName: Maven Package
+      displayName : Maven Package
       inputs:
         mavenPomFile: 'pom.xml'
 - task: CopyFiles@2
