@@ -19,16 +19,7 @@ stages:
     name: Pipeline Self Hosted  
 
     steps:
-    - task: SonarCloudPrepare@1
-      displayName: 'Prepare analysis on SonarCloud'
-      inputs:
-       SonarCloud: 'Sonar-Java'
-       organization: 'fmossamih01'
-       # Additional properties that will be passed to the scanner,
-       # Put one key=value per line, example:
-       # sonar.exclusions=**/*.bin
-       projectKey: 'fmossamih_JavaWebApplication'
-       projectName: 'JavaWebApplication'
+    - template: templates/sonar-prepare.yml
     - task: Maven@3
       inputs:
       mavenPomFile: 'pom.xml'
@@ -42,7 +33,4 @@ stages:
 
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
-    - task: SonarCloudAnalyze@1
-      displayName: 'Run Code Analysis'
-    - task: SonarCloudPublish@1
-      displayName: 'Publish Quality Gate Result'
+    - template: templates/sonar-execute.yml
