@@ -24,8 +24,8 @@ stages:
       inputs:
        SonarCloud: Sonar-Java
        organization: fmossamih01
-       projectKey: 'fmossamih_JavaWebApplication'
-       projectName: 'JavaWebApplication'
+       projectKey: fmossamih_JavaWebApplication
+       projectName: JavaWebApplication
     - task: Maven@3
       displayName: Maven Package
       inputs:
