@@ -30,15 +30,15 @@ stages:
        projectKey: 'fmossamih_JavaWebApplication'
        projectName: 'JavaWebApplication'
     - task: Maven@3
-      displayName: 'Maven Package'
       inputs:
-       mavenPomFile: 'pom.xml'
-    - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
-      inputs:
-       SourceFolder: '$(System.DefaultWorkingDirectory)'
-       Contents: '**/target/*.?(war|jar)'
-       TargetFolder: $(Build.ArtifactStagingDirectory)
+      mavenPomFile: 'pom.xml'
+      goals: 'clean verify sonar:sonar'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      codeCoverageToolOption: JaCoCo
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      mavenVersionOption: 'Default'
 
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
