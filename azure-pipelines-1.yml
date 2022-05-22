@@ -16,7 +16,7 @@ stages:
   - job: MavenPackageAndPublishArtifacts
     displayName: Maven Package and Publish Artifacts
   pool: 
-    name: Pipeline Self Hosted  
+    name: LOCAL_MACHINE  
 
     steps:
     - template: templates/sonar-prepare.yml
