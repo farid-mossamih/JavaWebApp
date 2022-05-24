@@ -1,10 +1,13 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
 
 trigger:
 - main
+
+
+
 
 stages:
 - stage: Build
@@ -13,25 +16,26 @@ stages:
   - job: MavenPackageAndPublishArtifacts
     displayName: Maven Package and Publish Artifacts
   pool: 
-    name: LOCAL_MACHINE 
+    name: LOCAL_MACHINE  
 
-  steps:
-  - template: templates/sonar-prepare.yml
-  - task: ExtractFiles@1
+    steps:
+    - template: templates/sonar-prepare.yml
+    - task: ExtractFiles@1
     inputs:
       archiveFilePatterns: '*.zip'
       destinationFolder: '$(Build.SourcesDirectory)'
       cleanDestinationFolder: false
-  - task: Maven@3
-    inputs:
+    - task: Maven@3
+      inputs:
       mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.8'
-      jdkArchitectureOption: 'x64'
+      goals: 'clean verify sonar:sonar'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      goals: 'package'
-  - upload: $(Build.ArtifactStagingDirectory)
-    artifact: drop
-  - template: templates/sonar-execute.yml
+      codeCoverageToolOption: JaCoCo
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      mavenVersionOption: 'Default'
+
+    - upload: $(Build.ArtifactStagingDirectory)
+      artifact: drop
+    - template: templates/sonar-execute.yml
