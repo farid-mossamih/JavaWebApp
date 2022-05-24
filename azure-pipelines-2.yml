@@ -31,7 +31,7 @@ stages:
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
-     goals: 'package'
+      goals: 'package'
   - upload: $(Build.ArtifactStagingDirectory)
     artifact: drop
   - template: templates/sonar-execute.yml
