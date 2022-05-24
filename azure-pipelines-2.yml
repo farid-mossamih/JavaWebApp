@@ -21,7 +21,7 @@ stages:
     steps:
     - template: templates/sonar-prepare.yml
     - task: ExtractFiles@1
-    inputs:
+      inputs:
       archiveFilePatterns: '*.zip'
       destinationFolder: '$(Build.SourcesDirectory)'
       cleanDestinationFolder: false
