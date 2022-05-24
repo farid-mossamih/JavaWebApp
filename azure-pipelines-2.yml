@@ -15,23 +15,23 @@ stages:
   pool: 
     name: LOCAL_MACHINE 
 
-steps:
-- template: templates/sonar-prepare.yml
-- task: ExtractFiles@1
-  inputs:
-    archiveFilePatterns: '*.zip'
-    destinationFolder: '$(Build.SourcesDirectory)'
-    cleanDestinationFolder: false
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
-- upload: $(Build.ArtifactStagingDirectory)
-  artifact: drop
-- template: templates/sonar-execute.yml
+  steps:
+  - template: templates/sonar-prepare.yml
+  - task: ExtractFiles@1
+    inputs:
+      archiveFilePatterns: '*.zip'
+      destinationFolder: '$(Build.SourcesDirectory)'
+      cleanDestinationFolder: false
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+     goals: 'package'
+  - upload: $(Build.ArtifactStagingDirectory)
+    artifact: drop
+  - template: templates/sonar-execute.yml
